@@ -1,0 +1,22 @@
+from cryptography.fernet import Fernet
+from PIL import Image
+import io
+
+# Generate a key for encryption (this key should be kept secret)
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
+
+# Load the image
+image_path = 'input_image.jpg'
+with open(image_path, 'rb') as f:
+    image_bytes = f.read()
+
+# Encrypt the image bytes
+encrypted_image = cipher_suite.encrypt(image_bytes)
+
+# Save the encrypted image
+encrypted_image_path = 'encrypted_image.jpg'
+with open(encrypted_image_path, 'wb') as f:
+    f.write(encrypted_image)
+
+print("Image encrypted and saved as:", encrypted_image_path)
